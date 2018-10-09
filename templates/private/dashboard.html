@@ -1,11 +1,158 @@
 {% extends "base.html" %}
 
-{% block title %} Haasome - Dashboard {% endblock %}
+{% block title %} CTJ - Dashboard {% endblock %}
 
 {% block content %}
-
+<div class="row row-cards">
+  <div class="col-6 col-sm-4 col-lg-3">
+    <div class="card">
+      <div class="card-body p-3 text-center">
+        <div class="text-right text-green">
+          6%
+          <i class="fe fe-chevron-up"></i>
+        </div>
+        <div class="h1 m-0">4.82380027</div>
+        <div class="text-muted mb-4">Account Balance</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-4 col-lg-3">
+    <div class="card">
+      <div class="card-body p-3 text-center">
+        <div class="text-right text-red">
+          -3%
+          <i class="fe fe-chevron-down"></i>
+        </div>
+        <div class="h1 m-0">-0.02200000</div>
+        <div class="text-muted mb-4">Last Day Revenue</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-4 col-lg-3">
+    <div class="card">
+      <div class="card-body p-3 text-center">
+        <div class="text-right text-green">
+          9%
+          <i class="fe fe-chevron-up"></i>
+        </div>
+        <div class="h1 m-0">0.12079045</div>
+        <div class="text-muted mb-4">Revenue This Week</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-sm-4 col-lg-3">
+    <div class="card">
+      <div class="card-body p-3 text-center">
+        <div class="text-right text-green">
+          3%
+          <i class="fe fe-chevron-up"></i>
+        </div>
+        <div class="h1 m-0">0.20390047</div>
+        <div class="text-muted mb-4">Revenue This Month</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Most Recent Trades</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table card-table table-striped table-vcenter">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Coin Pair</th>
+              <th>Position</th>
+              <th>Win/Loss</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: rgb(245,251,248);">
+              <td class="text-nowrap">May 6, 2018</td>
+              <td>Binance BTC/ETH</td>
+              <td><div class="btn btn-block btn-success">Long</div></td>
+              <td><div class="text-green">+0.00327602</div></td>
+              <td class="w-1"><a href="#" class="icon"><i class="fe fe-eye"></i></a></td>
+            </tr>
+            <tr style="background-color: rgb(254,245,245);">
+              <td class="text-nowrap">May 6, 2018</td>
+              <td>Binance BTC/XRP</td>
+              <td><div class="btn btn-block btn-success">Long</div></td>
+              <td><div class="text-red">-0.00123702</div></td>
+              <td class="w-1"><a href="#" class="icon"><i class="fe fe-eye"></i></a></td>
+            </tr>
+            <tr style="background-color: rgb(245,251,248);">
+              <td class="text-nowrap">May 6, 2018</td>
+              <td>Binance BTC/TRX</td>
+              <td><div class="btn btn-block btn-success">Long</div></td>
+              <td><div class="text-green">+0.04121602</div></td>
+              <td class="w-1"><a href="#" class="icon"><i class="fe fe-eye"></i></a></td>
+            </tr>
+            <tr style="background-color: rgb(245,251,248);">
+              <td class="text-nowrap">May 6, 2018</td>
+              <td>Binance BTC/ETH</td>
+              <td><div class="btn btn-block btn-success">Long</div></td>
+              <td><div class="text-green">+0.00021237</div></td>
+              <td class="w-1"><a href="#" class="icon"><i class="fe fe-eye"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 h-25 ">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Profit Loss Ratio</h3>
+      </div>
+      <div class="card-body">
+        <div id="chart-donut" style="height: 15rem;"></div>
+      </div>
+    </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
+<script>
+  require(['c3', 'jquery'], function(c3, $) {
+    $(document).ready(function(){
+        var chart = c3.generate({
+            bindto: '#chart-donut', // id of chart wrapper
+            data: {
+                columns: [
+                    // each columns data
+                    ['data1', 63],
+                    ['data2', 37]
+                ],
+                type: 'donut', // default type of chart
+                colors: {
+                    'data1': tabler.colors["green"],
+                    'data2': tabler.colors["red"]
+                },
+                names: {
+                    // name of each serie
+                    'data1': 'Win',
+                    'data2': 'Loss'
+                }
+            },
+            axis: {
+            },
+            legend: {
+                  show: false, //hide legend
+            },
+            padding: {
+                bottom: 0,
+                top: 0
+            },
+            donut: {
+                title: "63.00% Win Rate"
+            }
+        });
+    });
+  });
+</script>
 
 {% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} CTJ - Trades {% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  
+  <div class="card-header container-fluid">
+    <h3 class="card-title">Trade History </h3>
+    <div class="card-options">
+        <div class="btn btn-sm float-right btn-info">Add Trade</div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table id="example" class="table table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Exchange</th>
+                <th>Coin Pair</th>
+                <th>Setup</th>
+                <th>Direction</th>
+                <th>Entry Price</th>
+                <th>Exit Price</th>
+                <th>Fees</th>
+                <th>PNL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: rgb(245,251,248);">
+                <td>1</td>
+                <td>May 6, 2018</td>
+                <td>Binance</td>
+                <td>BTC / ETH</td>
+                <td>Madhatter</td>
+                <td><div class="btn btn-sm btn-block btn-success">Long</div></td>
+                <td>0.03224587</td>
+                <td>0.03324587</td>
+                <td>0.00004376</td>
+                <td><div class="text-green">+0.01000000</div></td>
+                <td>
+                    <button class="btn btn-sm btn-danger pull-left"><i class="fe fe-trash"></i></button>
+                    <button class="btn btn-sm btn-primary pull-right"><i class="fe fe-eye"></i></button>
+                </td>
+            </tr>
+            <tr style="background-color: rgb(254,245,245);">
+                <td>2</td>
+                <td>May 6, 2018</td>
+                <td>Binance</td>
+                <td>BTC / ETH</td>
+                <td>Madhatter</td>
+                <td><div class="btn btn-sm btn-block btn-success">Long</div></td>
+                <td>0.03324587</td>
+                <td>0.03224587</td>
+                <td>0.00004376</td>
+                <td><div class="text-red">-0.01000000</div></td>
+                <td>
+                    <button class="btn btn-sm btn-danger pull-left"><i class="fe fe-trash"></i></button>
+                    <button class="btn btn-sm btn-primary pull-right"><i class="fe fe-eye"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  require(['datatables.net', 'jquery', 'datatablesbootstrap'], function(c3, $) {
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+  });
+</script>
+{% endblock %}

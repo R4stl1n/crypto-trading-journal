@@ -2,6 +2,7 @@ import os
 import sys
 
 from flask import Flask
+from flask import redirect
 from flask import render_template
 from flask_peewee.db import Database
 from flask_security import Security
@@ -22,6 +23,8 @@ app.config.from_object('appconfig.Configuration')
 db = Database(app)
 
 from cryptotradingjournal.blueprints.DashboardBlueprint import dashboard_bp
+from cryptotradingjournal.blueprints.AnalyticsBlueprint import analytics_bp
+from cryptotradingjournal.blueprints.TradesBlueprint import trades_bp
 
 from cryptotradingjournal.models.UserModel import UserModel
 from cryptotradingjournal.models.RoleModel import RoleModel
@@ -33,6 +36,8 @@ user_datastore = PeeweeUserDatastore(db, UserModel, RoleModel, UserRolesModel)
 security = Security(app, user_datastore)
 
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(analytics_bp)
+app.register_blueprint(trades_bp)
 
 @app.before_first_request
 def first_run():
@@ -46,6 +51,6 @@ def first_run():
 @app.route('/')
 @login_required
 def index():
-    return render_template('private/dashboard.html')
+    return redirect("/dashboard")
 
 

@@ -3,6 +3,17 @@
 {% block title %} CTJ - Trades {% endblock %}
 
 {% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+<style>
+.card-header-tabs {
+  line-height: inherit;
+}
+
+.modal-lg {
+    max-width: 60% !important;
+}
+</style>
+
 
 {% endblock %}
 
@@ -13,7 +24,7 @@
   <div class="card-header container-fluid">
     <h3 class="card-title">Trade History </h3>
     <div class="card-options">
-        <div class="btn btn-sm float-right btn-info">Add Trade</div>
+        <button class="btn btn-sm float-right btn-info" data-toggle="modal" data-target="#exampleModal">Add Trade</button>
     </div>
   </div>
 
@@ -73,10 +84,134 @@
 </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Trade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5>General Trade Data</h5>
+                    <form class="pt-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Entry Date</label>
+                            <input type="text" name="field-name" class="form-control" data-mask="00/00/0000 00:00" data-mask-clearifnotmatch="true" placeholder="00/00/0000 00:00" autocomplete="off" maxlength="10">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Exit Date</label>
+                            <input type="text" name="field-name" class="form-control" data-mask="00/00/0000 00:00" data-mask-clearifnotmatch="true" placeholder="00/00/0000 00:00" autocomplete="off" maxlength="10">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Exchange</label>
+                            <select class="custom-select">
+                              <option value="STATUS_CODE" selected>Binance</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Coin Pair</label>
+                            <input type="text" name="field-name" class="form-control" data-mask="AAA/SSSS" placeholder="BTC/IOTA" data-mask-clearifnotmatch="false" autocomplete="off" maxlength="10">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <h5>Trade Specific Infrmation</h5>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="custom-controls-stacked">
+                          <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="example-inline-radios" value="option1" checked>
+                            <span class="custom-control-label">Long</span>
+                          </label>
+                          <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="example-inline-radios" value="option2">
+                            <span class="custom-control-label">Short</span>
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <form class="pt-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Entry Price</label>
+                            <input type="number" placeholder="1.00000000" class="form-control"/>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Exit Price</label>
+                            <input type="number" placeholder="1.00000000" class="form-control"/>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Fee</label>
+                            <input type="number" placeholder="1.00000000" class="form-control"/>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="bmd-label-floating">Quantity</label>
+                            <input type="number" placeholder="1.00000000" class="form-control"/>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+
+              <div class="form-group mb-0">
+                <label class="form-label">Trade Notes</label>
+                <textarea rows="5" class="form-control" placeholder="Trade notes here" value="Mike"></textarea>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary pull-right" data-toggle="modal" data-target="#exampleModal">Close</button>
+        <button class="btn btn-info">Add Trade</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
+  require(['input-mask']);
   require(['datatables.net', 'jquery', 'datatablesbootstrap'], function(c3, $) {
     $(document).ready(function() {
         $('#example').DataTable();
